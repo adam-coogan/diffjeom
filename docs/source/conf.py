@@ -42,12 +42,13 @@ extensions = [
 
 
 def linkcode_resolve(domain, info):
+    # TODO: update if stuff ever gets refactored out of __init__
     if domain != "py":
         return None
     if not info["module"]:
         return None
-    filename = info["module"].replace(".", "/")
-    return "https://github.com/adam-coogan/diffjeom/tree/master/%s.py" % filename
+    # filename = info["module"].replace(".", "/")
+    return f"https://github.com/adam-coogan/diffjeom/blob/main/src/diffjeom/__init__.py"
 
 
 # Add any paths that contain templates here, relative to this directory.
@@ -70,4 +71,3 @@ html_theme = "furo"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
-

@@ -140,9 +140,9 @@ def check_riemann_sym(g: Array, R: Array, rtol: float = 1e-5, atol: float = 1e-8
     R_lower = jnp.einsum("...as,...sbcd->...abcd", g, R)
     if not jnp.allclose(R_lower, -jnp.einsum("...abdc->...abcd", R_lower), rtol, atol):
         raise ValueError("R_rsmn is not antisymmetric in the last two indices")
-    if jnp.allclose(R_lower, -jnp.einsum("...bacd->...abcd", R_lower), rtol, atol):
+    if not jnp.allclose(R_lower, -jnp.einsum("...bacd->...abcd", R_lower), rtol, atol):
         raise ValueError("R_rsmn is not antisymmetric in the first two indices")
-    if jnp.allclose(
+    if not jnp.allclose(
         R_lower
         + jnp.einsum("...acdb->...abcd", R_lower)
         + jnp.einsum("...adbc->...abcd", R_lower),
@@ -151,7 +151,7 @@ def check_riemann_sym(g: Array, R: Array, rtol: float = 1e-5, atol: float = 1e-8
         atol,
     ):
         raise ValueError("R_rsmn does not satisfy the first Bianchi identity")
-    if jnp.allclose(R_lower, jnp.einsum("...cdab->...abcd", R_lower), rtol, atol):
+    if not jnp.allclose(R_lower, jnp.einsum("...cdab->...abcd", R_lower), rtol, atol):
         raise ValueError("R_rsmn does not satisfy interchange symmetry")
 
 
